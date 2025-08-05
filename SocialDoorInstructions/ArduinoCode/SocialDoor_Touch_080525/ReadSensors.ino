@@ -35,23 +35,21 @@ void updateBaselines() {
   // Take multiple readings and average them for more stable baselines
   int left_sum = 0;
   int right_sum = 0;
-  const int num_readings = 10;
+  const int baseline_samples = 3;
   
-  for (int i = 0; i < num_readings; i++) {
+  for (int i = 0; i < baseline_samples; i++) {
     left_sum += left.measure();
     right_sum += right.measure();
-    delay(10); // Small delay between readings
+    delay(10);
   }
   
-  left_baseline = left_sum / num_readings;
-  right_baseline = right_sum / num_readings;
-  
-  // Update the timestamp
+  left_baseline = left_sum / baseline_samples;
+  right_baseline = right_sum / baseline_samples;
   last_baseline_update = millis();
   
   // Optional: Log baseline updates
-  Serial.print("Baselines updated - Left: ");
-  Serial.print(left_baseline);
-  Serial.print(", Right: ");
-  Serial.println(right_baseline);
+  Serial.println("--- Baseline Update ---");
+  Serial.print("Left baseline: "); Serial.println(left_baseline);
+  Serial.print("Right baseline: "); Serial.println(right_baseline);
+  Serial.println("----------------------");
 }

@@ -12,6 +12,7 @@ SdFat SD;  //Make SdFat work with standard SD.h sketches
 #include <splash.h>
 #include "RTClib.h"
 RTC_PCF8523 rtc;
+#include "Adafruit_FreeTouch.h"
 
 //Constants
 int open_num = 0;
@@ -53,22 +54,17 @@ const int chipSelect = 4;
 File logfile;     // Create file object
 File configfile;  // Create another file object
 
-// Touch sensor objects and baseline tracking
-// Note: These appear to be placeholder objects - replace with actual sensor library objects
-// For now, creating simple objects that can be replaced with actual sensor implementations
-class TouchSensor {
-public:
-  int measure() { return 0; } // Placeholder - replace with actual sensor reading
-};
-
-TouchSensor left;
-TouchSensor right;
+// FreeTouch sensors with maximum sensitivity configuration
+// Left is on pin A1, named "T1" on the board
+Adafruit_FreeTouch left = Adafruit_FreeTouch(A1, OVERSAMPLE_64, RESISTOR_0, FREQ_MODE_NONE);
+// Right is on pin A2, named "T2" on the board
+Adafruit_FreeTouch right = Adafruit_FreeTouch(A2, OVERSAMPLE_64, RESISTOR_0, FREQ_MODE_NONE);
 
 // Baseline tracking variables
-unsigned long last_baseline_update = 0;
-const unsigned long BASELINE_INTERVAL = 60000; // Update baselines every 60 seconds
 int left_baseline = 0;
 int right_baseline = 0;
+unsigned long last_baseline_update = 0;
+const unsigned long BASELINE_INTERVAL = 60000; // Update baselines every 60 seconds
 
 // Function declaration for baseline updates
 void updateBaselines();

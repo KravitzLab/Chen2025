@@ -17,19 +17,29 @@ void setup() {
 
 void loop() {
   int counter, result = 0;
-  
+
   // Check if it's time to update baselines
   if (millis() - last_baseline_update >= BASELINE_INTERVAL) {
     updateBaselines();
   }
-  
-  counter = millis();
-  result = left.measure(); 
+
+  result = left.measure();
   int left_change = result - left_baseline;
-    
-  counter = millis();
-  result = right.measure(); 
+  Serial.print("Left sensor: ");
+  Serial.print(result);
+  Serial.print(", baseline: ");
+  Serial.print(left_baseline);
+  Serial.print(", change: ");
+  Serial.println(left_change);
+  
+  result = right.measure();
   int right_change = result - right_baseline;
+  Serial.print("Right sensor: ");
+  Serial.print(result);
+  Serial.print(", baseline: ");
+  Serial.print(right_baseline);
+  Serial.print(", change: ");
+  Serial.println(right_change);
 
   // if left change is greater than 100, then we have a pulse
   if (left_change > 100) {
@@ -63,7 +73,9 @@ void loop() {
     display.oled_command(SH110X_DISPLAYOFF);
     digitalWrite(13, LOW);
 
-    //If we sleep we won't be sensitive to touches so we need to turn this off
-    //LowPower.sleep(1000);
+    //   //If we sleep we won't be sensitive to touches so we need to turn this off
+    //   //LowPower.sleep(1000);
+    // }
   }
+  delay(100);
 }
