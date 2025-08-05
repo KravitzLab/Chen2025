@@ -66,5 +66,12 @@ int right_baseline = 0;
 unsigned long last_baseline_update = 0;
 const unsigned long BASELINE_INTERVAL = 60000; // Update baselines every 60 seconds
 
+// Touch duration tracking variables
+unsigned long left_touch_start = 0;
+unsigned long right_touch_start = 0;
+bool left_touch_active = false;
+bool right_touch_active = false;
+const unsigned long TOUCH_DURATION_THRESHOLD = 200; // Minimum touch duration in milliseconds
+
 // Function declaration for baseline updates
 void updateBaselines();

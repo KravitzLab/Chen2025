@@ -41,17 +41,50 @@ void loop() {
   Serial.print(", change: ");
   Serial.println(right_change);
 
-  // if left change is greater than 100, then we have a pulse
-  if (left_change > 100) {
-    Serial.println("Left pulse detected - open door");
-    button = 0;
-    open_num++;
-    open_door();
+  // Touch duration logic for left sensor
+  if (left_change > 25) {
+    if (!left_touch_active) {
+      // Touch just started
+      left_touch_active = true;
+      left_touch_start = millis();
+      Serial.println("Left touch started");
+    }
+    // Check if touch has lasted long enough
+    if (left_touch_active && (millis() - left_touch_start >= TOUCH_DURATION_THRESHOLD)) {
+      Serial.println("Left pulse detected - open door");
+      button = 0;
+      open_num++;
+      open_door();
+      left_touch_active = false; // Reset to prevent multiple triggers
+    }
+  } else {
+    // Touch ended or below threshold
+    if (left_touch_active) {
+      Serial.println("Left touch ended");
+      left_touch_active = false;
+    }
   }
-  // if right change is greater than 100, then we have a pulse
-  if (right_change > 100) {
-    Serial.println("Right pulse detected - no door");
-    Timeout(5000);
+
+  // Touch duration logic for right sensor
+  if (right_change > 25) {
+    if (!right_touch_active) {
+      // Touch just started
+      right_touch_active = true;
+      right_touch_start = millis();
+      Serial.println("Right touch started");
+    }
+    // Check if touch has lasted long enough
+    if (right_touch_active && (millis() - right_touch_start >= TOUCH_DURATION_THRESHOLD)) {
+      Serial.println("Right pulse detected - no door");
+      Timeout(5000);
+      right_touch_active = false; // Reset to prevent multiple triggers
+    }
+  } else {
+    // Touch ended or below threshold
+    if (right_touch_active) {
+      Serial.println("Right touch ended");
+      right_touch_active = false;
+    }
   }
 
   // When button is pushed
