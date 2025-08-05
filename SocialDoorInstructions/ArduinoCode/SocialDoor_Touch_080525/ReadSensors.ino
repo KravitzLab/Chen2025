@@ -27,3 +27,31 @@ void read_sensors() {
     // update_display();
   }
 }
+
+void updateBaselines() {
+  // Update the baseline values for touch sensors
+  // This function should be called periodically to maintain accurate baseline readings
+  
+  // Take multiple readings and average them for more stable baselines
+  int left_sum = 0;
+  int right_sum = 0;
+  const int num_readings = 10;
+  
+  for (int i = 0; i < num_readings; i++) {
+    left_sum += left.measure();
+    right_sum += right.measure();
+    delay(10); // Small delay between readings
+  }
+  
+  left_baseline = left_sum / num_readings;
+  right_baseline = right_sum / num_readings;
+  
+  // Update the timestamp
+  last_baseline_update = millis();
+  
+  // Optional: Log baseline updates
+  Serial.print("Baselines updated - Left: ");
+  Serial.print(left_baseline);
+  Serial.print(", Right: ");
+  Serial.println(right_baseline);
+}

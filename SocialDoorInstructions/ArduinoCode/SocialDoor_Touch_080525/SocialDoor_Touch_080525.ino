@@ -3,13 +3,6 @@
   Written by Lex Kravitz and Yiru Chen
   March 2024
 
-  Events:
-  1) Pulse detected
-  2) Start door opening
-  3) Door opened
-  4) Start door closing
-  5) Door closed
-
   This project is released under the terms of the Creative Commons - Attribution - ShareAlike 3.0 license:
   human readable: https://creativecommons.org/licenses/by-sa/3.0/
   legal wording: https://creativecommons.org/licenses/by-sa/3.0/legalcode
@@ -23,13 +16,33 @@ void setup() {
 }
 
 void loop() {
-  // When input pulse is received
-  if (digitalRead(12) == HIGH) {
+  int counter, result = 0;
+  
+  // Check if it's time to update baselines
+  if (millis() - last_baseline_update >= BASELINE_INTERVAL) {
+    updateBaselines();
+  }
+  
+  counter = millis();
+  result = left.measure(); 
+  int left_change = result - left_baseline;
+    
+  counter = millis();
+  result = right.measure(); 
+  int right_change = result - right_baseline;
+
+  // if left change is greater than 100, then we have a pulse
+  if (left_change > 100) {
+    Serial.println("Left pulse detected - open door");
     button = 0;
     open_num++;
     open_door();
   }
-
+  // if right change is greater than 100, then we have a pulse
+  if (right_change > 100) {
+    Serial.println("Right pulse detected - no door");
+    Timeout(5000);
+  }
 
   // When button is pushed
   if (digitalRead(6) == LOW) {
@@ -49,6 +62,8 @@ void loop() {
     //turn off the screen
     display.oled_command(SH110X_DISPLAYOFF);
     digitalWrite(13, LOW);
-    LowPower.sleep(1000);
+
+    //If we sleep we won't be sensitive to touches so we need to turn this off
+    //LowPower.sleep(1000);
   }
 }

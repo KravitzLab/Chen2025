@@ -52,3 +52,23 @@ Servo myservo;  // create servo object to control a servo
 const int chipSelect = 4;
 File logfile;     // Create file object
 File configfile;  // Create another file object
+
+// Touch sensor objects and baseline tracking
+// Note: These appear to be placeholder objects - replace with actual sensor library objects
+// For now, creating simple objects that can be replaced with actual sensor implementations
+class TouchSensor {
+public:
+  int measure() { return 0; } // Placeholder - replace with actual sensor reading
+};
+
+TouchSensor left;
+TouchSensor right;
+
+// Baseline tracking variables
+unsigned long last_baseline_update = 0;
+const unsigned long BASELINE_INTERVAL = 60000; // Update baselines every 60 seconds
+int left_baseline = 0;
+int right_baseline = 0;
+
+// Function declaration for baseline updates
+void updateBaselines();
