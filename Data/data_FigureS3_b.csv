@@ -11,6 +11,10 @@ device_number,mode,behavior,event
 7,empty,Seeking,16.5
 7,social,Exploring,13.666666666666666
 7,social,Seeking,62.0
+8,empty,Exploring,15.5
+8,empty,Seeking,10.666666666666666
+8,social,Exploring,12.5
+8,social,Seeking,98.5
 10,empty,Exploring,11.666666666666666
 10,empty,Seeking,13.0
 10,social,Exploring,11.333333333333334
