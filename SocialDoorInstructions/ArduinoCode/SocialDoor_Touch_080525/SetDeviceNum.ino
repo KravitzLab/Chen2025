@@ -25,7 +25,7 @@ void set_device_num() {
       SOC++;
       delay(300);
       functiontime = millis();
-      if (SOC > 30) {
+      if (SOC > 99) {
         SOC = 0;
       }
     }
@@ -35,7 +35,7 @@ void set_device_num() {
       delay(300);
       functiontime = millis();
       if (SOC < 0) {
-        SOC = 30;
+        SOC = 99;
       }
     }
   }

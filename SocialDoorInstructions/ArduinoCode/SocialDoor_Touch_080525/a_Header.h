@@ -1,6 +1,5 @@
 #include <Wire.h>
 #include <SPI.h>
-//#include <SD.h>
 #include <Adafruit_VL6180X.h>
 #include <Servo.h>
 #include <Adafruit_GFX.h>
@@ -15,7 +14,7 @@ RTC_PCF8523 rtc;
 #include "Adafruit_FreeTouch.h"
 
 //Constants
-int open_num = 0;
+int event = 0;
 float screen_time = 0;
 int condition = 0;
 float door_open = 0;
@@ -37,7 +36,6 @@ int SOC;        //This is the unique # of the device
 char filename[30];  // make a "char" type variable called "filename" [13]
 unsigned long startreading = millis();
 float new_trial = millis() / 1000.000;
-int event = 0;
 int door = 0;
 
 // objects for the VL6180X

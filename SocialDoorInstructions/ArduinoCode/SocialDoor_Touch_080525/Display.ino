@@ -29,7 +29,7 @@ void update_display() {
     display.println(Range2);
     display.println();
     display.println("Openings");
-    display.println(open_num);
+    display.println(event);
     display.println();
     display.println((millis() - door_open) / 1000, 0);
     display.display();
