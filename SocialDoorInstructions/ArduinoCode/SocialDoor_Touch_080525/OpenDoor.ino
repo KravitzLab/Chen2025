@@ -1,7 +1,7 @@
 void open_door() {
   //Trigger the door with input on audio jack or button push
   //only open door if pulse is still high (Left poke should make a long pulse, Right poke makes a short pulse)
-  // open_num++;
+  // event++;
   read_sensors();
   digitalWrite(A1, HIGH);
   digitalWrite(11, HIGH);
@@ -211,7 +211,7 @@ void open_door_button() {
     door = -1;
   }
   button = -1;  //5/17/24 moved here
-  open_num++;
+  event++;
   new_trial = millis() / 1000.000;
   read_sensors();
   // update_display();  // For a press shorter than 1.2 s, screen will show up. Longer than 1.2 s, door will open.

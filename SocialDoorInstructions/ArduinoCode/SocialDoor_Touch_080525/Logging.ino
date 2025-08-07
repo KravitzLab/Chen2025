@@ -1,7 +1,7 @@
 // Write data header to file of uSD.
 void writeHeader() {
   logfile = SD.open(filename, FILE_WRITE);
-  logfile.println("Datetime,Seconds,Device_Number,Battery_Voltage,Prox1,Prox2,Event,Door");
+  logfile.println("Datetime,Seconds,Device_Number,Battery_Voltage,Prox1,Prox2,Event,DoorOpen,LeftTouch,RightTouch");
   logfile.close();
 }
 
@@ -9,7 +9,8 @@ void writeHeader() {
 void logdata() {
   if (!SD.begin(chipSelect, SD_SCK_MHZ(4))) {
     Serial.println("Card failed, or not present");
-    error();
+    Serial.println("Continuing without logging...");
+    return; // Don't call error(), just return
   }
   
   digitalWrite(13, HIGH);
@@ -18,6 +19,13 @@ void logdata() {
   digitalWrite(13, LOW);
   // getFilename(filename);
   logfile = SD.open(filename, FILE_WRITE);
+  
+  if (!logfile) {
+    Serial.println("Failed to open log file");
+    Serial.println("Continuing without logging...");
+    return; // Don't call error(), just return
+  }
+  
   logfile.print(now.month());
   logfile.print('/');
   logfile.print(now.day());
@@ -40,10 +48,14 @@ void logdata() {
   logfile.print(",");
   logfile.print(Range2);  //print range2
   logfile.print(",");
-  logfile.print(open_num);  //print event
+  logfile.print(event);  //print event
   logfile.print(",");
-  logfile.println(door);  //print door situation
-
+  logfile.print(door);  //print door situation
+  logfile.print(",");
+  logfile.print(left_touch_active);
+  logfile.print(",");
+  logfile.print(right_touch_active);
+  logfile.println();
 
   if (!logfile) {
     error();
