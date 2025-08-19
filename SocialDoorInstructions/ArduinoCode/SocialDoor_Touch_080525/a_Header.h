@@ -19,6 +19,8 @@ float screen_time = 0;
 int condition = 0;
 float door_open = 0;
 int button = 0;
+int event_L = 0;
+int event_R = 0;
 
 //Screen
 Adafruit_SH1107 display = Adafruit_SH1107(64, 128, &Wire);
@@ -54,9 +56,11 @@ File configfile;  // Create another file object
 
 // FreeTouch sensors with maximum sensitivity configuration
 // Left is on pin A1, named "T1" on the board
-Adafruit_FreeTouch left = Adafruit_FreeTouch(A1, OVERSAMPLE_64, RESISTOR_0, FREQ_MODE_NONE);
+// Adafruit_FreeTouch left = Adafruit_FreeTouch(A1, OVERSAMPLE_64, RESISTOR_0, FREQ_MODE_NONE);
+Adafruit_FreeTouch left = Adafruit_FreeTouch(A1, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_HOP);
 // Right is on pin A2, named "T2" on the board
-Adafruit_FreeTouch right = Adafruit_FreeTouch(A2, OVERSAMPLE_64, RESISTOR_0, FREQ_MODE_NONE);
+// Adafruit_FreeTouch right = Adafruit_FreeTouch(A2, OVERSAMPLE_64, RESISTOR_0, FREQ_MODE_NONE);
+Adafruit_FreeTouch right = Adafruit_FreeTouch(A2, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_HOP);
 
 // Baseline tracking variables
 int left_baseline = 0;

@@ -28,8 +28,10 @@ void update_display() {
     display.println("Sensor2");
     display.println(Range2);
     display.println();
-    display.println("Openings");
-    display.println(event);
+    // display.println("Openings");
+    // display.println(event);
+    display.println("Left/Right");
+    display.printf("%d / %d\n", event_L, event_R);
     display.println();
     display.println((millis() - door_open) / 1000, 0);
     display.display();

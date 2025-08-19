@@ -17,6 +17,10 @@ void checkTouches() {
   
   result = right.measure();
   int right_change = result - right_baseline;
+  
+  // Human readable for Serial Monitor
+  Serial.print("Left: "); Serial.print(left_change);
+  Serial.print(" Right: "); Serial.println(right_change);
 
   // Touch duration logic for left sensor
   if (left_change > TOUCH_SENSITIVITY_THRESHOLD) {
@@ -31,6 +35,7 @@ void checkTouches() {
       Serial.println("Left pulse detected - open door");
       button = 0;
       event++;
+      event_L++;
       left_touch_active = false; // Reset to prevent multiple triggers
       open_door();
     }
@@ -53,6 +58,7 @@ void checkTouches() {
     if (right_touch_active && (millis() - right_touch_start >= TOUCH_DURATION_THRESHOLD)) {
       Serial.println("Right pulse detected - timeout");
       event++;
+      event_R++;
       right_touch_active = false; // Reset to prevent multiple triggers
       Timeout(TOUCH_TIMEOUT_DURATION);
     }
