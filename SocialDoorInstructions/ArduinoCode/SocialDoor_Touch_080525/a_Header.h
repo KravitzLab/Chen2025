@@ -21,6 +21,8 @@ float door_open = 0;
 int button = 0;
 int event_L = 0;
 int event_R = 0;
+int left_change;
+int right_change;
 
 //Screen
 Adafruit_SH1107 display = Adafruit_SH1107(64, 128, &Wire);

@@ -1,7 +1,7 @@
 // Write data header to file of uSD.
 void writeHeader() {
   logfile = SD.open(filename, FILE_WRITE);
-  logfile.println("Datetime,Seconds,Device_Number,Battery_Voltage,Prox1,Prox2,Event,DoorOpen,LeftTouch,RightTouch");
+  logfile.println("Datetime,Seconds,Device_Number,Battery_Voltage,Prox1,Prox2,Event,DoorOpen,LeftTouch,RightTouch,LeftChange,RightChange");
   logfile.close();
 }
 
@@ -55,6 +55,10 @@ void logdata() {
   logfile.print(left_touch_active);
   logfile.print(",");
   logfile.print(right_touch_active);
+  logfile.print(",");
+  logfile.print(left_change);
+  logfile.print(",");
+  logfile.print(right_change);
   logfile.println();
 
   if (!logfile) {
