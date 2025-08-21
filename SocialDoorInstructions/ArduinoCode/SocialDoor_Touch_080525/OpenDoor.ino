@@ -60,20 +60,7 @@ void open_the_door(int &k) {
     open_the_door(k);
   }
 
-  // //read while door opening
-  // while (digitalRead(A3) == LOW) {
-  //   read_sensors();
-  //   last_door_sensor_state = 0;
-  //   if (millis() - startopening > 6000) {
-  //     last_door_sensor_state == 1;
-  //     break;
-  //   }
-  // }
   digitalWrite(10, LOW);
-
-
-  // } else if (last_door_sensor_state == 1) {
-  //   door = 418;
 }
 
 void door_wait_open() {
@@ -84,7 +71,7 @@ void door_wait_open() {
 
   //wait 12s for door to close
   unsigned long startTime = millis();
-  while (millis() - startTime < 12000) {
+  while (millis() - startTime < TOUCH_TIMEOUT_DURATION) {
     read_sensors();  // Read sensors continuously
     // Optionally, add a short delay to prevent overwhelming the sensor readings
     delay(10);  // Delay 10 milliseconds to ease the loop
@@ -162,16 +149,6 @@ void close_door() {
     }
     read_sensors();
   }
-
-
-  // while (digitalRead(A3) == LOW) {
-  //   read_sensors();
-  //   if (millis() - startclosing > 4500) {
-  //     myservo.write(90);
-  //     door = 418;
-  //     break;
-  //   }
-  // }  //wait here until switch
 
   myservo.write(90);  // tell servo to go to position in variable 'pos'
   myservo.detach();
