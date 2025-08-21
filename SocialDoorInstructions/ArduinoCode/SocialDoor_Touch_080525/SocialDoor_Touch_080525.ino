@@ -66,7 +66,7 @@
 #include "a_Header.h"  //See "a_Header.h" for #defines and other constants
 
 // Touch sensitivity threshold
-const int TOUCH_SENSITIVITY_THRESHOLD = 50;
+const int TOUCH_SENSITIVITY_THRESHOLD = 3;
 
 // Timeout duration for touch sensors (in milliseconds)
 const unsigned long TOUCH_TIMEOUT_DURATION = 15000;
