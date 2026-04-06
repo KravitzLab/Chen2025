@@ -7,3 +7,7 @@ You can upload these to any board fabrication house, or if you want to use OshPa
 
 <img width="844" height="406" alt="{F38BA6A9-D192-4B31-8745-E68907130733}" src="https://github.com/user-attachments/assets/fcde7c25-7a41-4ae4-ac58-e119ef7a2aa3" />
 
+Routing:  
+<img width="840" alt="image" src="https://github.com/user-attachments/assets/475cf0d0-0747-4e11-9622-3329349b9c5f" />
+
+
